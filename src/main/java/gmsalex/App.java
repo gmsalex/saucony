@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("https://www.catfootwear.com/US/en/home");
+        driver.get("https://www.saucony.com/en/home");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         var titlebarElements = driver.findElements(By.cssSelector("button.ui-dialog-titlebar-close"));
         if (titlebarElements.size() > 0) {

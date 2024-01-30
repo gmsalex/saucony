@@ -11,9 +11,12 @@ public class App {
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("https://www.saucony.com/en/home");
+        driver.get("https://www.catfootwear.com/US/en/home");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.findElement(By.cssSelector("button.ui-dialog-titlebar-close")).click();
+        var titlebarElements = driver.findElements(By.cssSelector("button.ui-dialog-titlebar-close"));
+        if (titlebarElements.size() > 0) {
+            titlebarElements.get(0).click();
+        }
         // set break point here and add some snickers to cart
         driver.findElement(By.cssSelector("a.mini-cart-link")).click();
         var emptyCart = driver.findElements(By.cssSelector("div#empty-cart-icon"));

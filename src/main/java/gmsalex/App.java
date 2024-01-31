@@ -1,10 +1,9 @@
 package gmsalex;
 
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.time.Duration;
 
 public class App {
 
@@ -13,16 +12,18 @@ public class App {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://www.saucony.com/en/home");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        var titlebarElements = driver.findElements(By.cssSelector("button.ui-dialog-titlebar-close"));
-        if (titlebarElements.size() > 0) {
+        var titlebarElements = driver.findElements(
+            By.cssSelector("button.ui-dialog-titlebar-close"));
+        if (!titlebarElements.isEmpty()) {
             titlebarElements.get(0).click();
         }
         // set break point here and add some snickers to cart
-        driver.findElement(By.cssSelector("a.mini-cart-link")).click();
-        var emptyCart = driver.findElements(By.cssSelector("div#empty-cart-icon"));
-        if (emptyCart.size() == 0) {
+        String itemsInTheCart = driver.findElement(
+            By.xpath("//span[contains(@class, \"mini-cart-quantity-bag\")]")).getText();
+        if (!itemsInTheCart.equals("0")) {
+            driver.findElement(By.cssSelector("a.mini-cart-link")).click();
             var removeLinks = driver.findElements(By.cssSelector("a.mini-cart-product-remove"));
-            while (removeLinks.size() > 0) {
+            while (!removeLinks.isEmpty()) {
                 removeLinks.get(0).click();
                 removeLinks = driver.findElements(By.cssSelector("a.mini-cart-product-remove"));
             }

@@ -1,6 +1,7 @@
 package gmsalex;
 
 import java.time.Duration;
+import java.util.Arrays;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,7 +21,7 @@ public class App {
         // set break point here and add some snickers to cart
         String itemsInTheCart = driver.findElement(
             By.xpath("//span[contains(@class, \"mini-cart-quantity-bag\")]")).getText();
-        if (!itemsInTheCart.equals("0")) {
+        if (!Arrays.asList("0", "").contains(itemsInTheCart)) {
             driver.findElement(By.xpath("//a[contains(@class,\"mini-cart-link\")]")).click();
             var removeLinks = driver.findElements(By.cssSelector("a.mini-cart-product-remove"));
             while (!removeLinks.isEmpty()) {

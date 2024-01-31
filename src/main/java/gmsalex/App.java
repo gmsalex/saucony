@@ -21,7 +21,7 @@ public class App {
         String itemsInTheCart = driver.findElement(
             By.xpath("//span[contains(@class, \"mini-cart-quantity-bag\")]")).getText();
         if (!itemsInTheCart.equals("0")) {
-            driver.findElement(By.cssSelector("a.mini-cart-link")).click();
+            driver.findElement(By.xpath("//a[contains(@class,\"mini-cart-link\")]")).click();
             var removeLinks = driver.findElements(By.cssSelector("a.mini-cart-product-remove"));
             while (!removeLinks.isEmpty()) {
                 removeLinks.get(0).click();
